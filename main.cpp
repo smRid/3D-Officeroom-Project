@@ -29,7 +29,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 void drawCube(unsigned int& cubeVAO, Shader& lightingShader, glm::mat4 model, float r, float g, float b);
 void drawTriangle(unsigned int& triangleVAO, Shader& lightingShader, glm::mat4 model, float r, float g, float b);
-void bed(unsigned int& cubeVAO, Shader& lightingShader, glm::mat4 alTogether);
+//void bed(unsigned int& cubeVAO, Shader& lightingShader, glm::mat4 alTogether);
 
 
 // settings
@@ -64,10 +64,10 @@ DirectionalLight directionalLight(-directionalLight_direction, glm::vec4(0.2f, 0
 
 // positions of the point lights
 glm::vec3 pointLightPositions[] = {
-    glm::vec3(1.50f,  1.50f,  0.0f),
-    glm::vec3(1.5f,  -1.5f,  0.0f),
-    glm::vec3(-1.5f,  1.5f,  0.0f),
-    glm::vec3(-1.5f,  -1.5f,  0.0f)
+    glm::vec3(1.50f,  1.2f,  1.4f),
+    glm::vec3(-0.85f,  1.2f,  0.2f),
+    glm::vec3(-3.5f,  1.2f,  1.4f),
+    glm::vec3(-0.85f,  -0.8f,  1.0f)
 };
 
 PointLight pointlight1(
@@ -279,7 +279,7 @@ int main()
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
     glEnableVertexAttribArray(1);
 
-    
+
     //------------------------------------------------- 3D Triangle
     float triangle_vertices[] = {
         // positions      // normals
@@ -386,30 +386,30 @@ int main()
         scaleMatrix = glm::scale(identityMatrix, glm::vec3(scale_X, scale_Y, scale_Z));
 
 
-        //Drawing a sphere
-        Sphere sphere1 = Sphere();
-                         //r    g     b      values
-        sphere1.setColor(0.2f, 1.0f, 0.3f);
-        translateMatrix = glm::translate(identityMatrix, glm::vec3(-1.8f, 0.0f, 0.0f));
-        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.7f, 0.4f, 0.7f));
-        model = translateMatrix * scaleMatrix;
-        sphere1.drawSphere(lightingShader, model);
+        ////Drawing a sphere
+        //Sphere sphere1 = Sphere();
+        //                 //r    g     b      values
+        //sphere1.setColor(0.2f, 1.0f, 0.3f);
+        //translateMatrix = glm::translate(identityMatrix, glm::vec3(-1.8f, 0.0f, 0.0f));
+        //scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.7f, 0.4f, 0.7f));
+        //model = translateMatrix * scaleMatrix;
+        //sphere1.drawSphere(lightingShader, model);
 
 
-        //Drawing a triangle
-        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.0f, -1.0f, -0.2f));
-        scaleMatrix = glm::scale(identityMatrix, glm::vec3(1.5f, 0.7f, 1.0f));
-        model = translateMatrix * scaleMatrix;
-                                                         //r    g     b      values
-        drawTriangle(triangleVAO, lightingShader, model, 0.8f, 0.3f, 1.0f);
+        ////Drawing a triangle
+        //translateMatrix = glm::translate(identityMatrix, glm::vec3(0.0f, -1.0f, -0.2f));
+        //scaleMatrix = glm::scale(identityMatrix, glm::vec3(1.5f, 0.7f, 1.0f));
+        //model = translateMatrix * scaleMatrix;
+        //                                                 //r    g     b      values
+        //drawTriangle(triangleVAO, lightingShader, model, 0.8f, 0.3f, 1.0f);
 
 
-        //Drawing a cube
-        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.8f, -0.4f, -0.6f));
-        scaleMatrix = glm::scale(identityMatrix, glm::vec3(1.0f, 1.0f, 1.0f));
-        model = translateMatrix * scaleMatrix;
-                                                 //r    g     b      values
-        drawCube(cubeVAO, lightingShader, model, 0.1f, 0.6f, 1.0f);
+        ////Drawing a cube
+        //translateMatrix = glm::translate(identityMatrix, glm::vec3(1.8f, -0.4f, -0.6f));
+        //scaleMatrix = glm::scale(identityMatrix, glm::vec3(1.0f, 1.0f, 1.0f));
+        //model = translateMatrix * scaleMatrix;
+        //                                         //r    g     b      values
+        //drawCube(cubeVAO, lightingShader, model, 0.1f, 0.6f, 1.0f);
 
 
         // Also draw the lamp object(s)
@@ -418,6 +418,387 @@ int main()
         // We don't need the lighting effects on the cubes, that's why we are using simple shader, with only one color element
         // fragmentShader.fs and vertexShader.fs are the simple shaders codes. 
         // SEE THESE TWO FILES!
+
+          //walls--------------------------/
+          
+        //Drawing a cube bottom wall
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.7f, -0.7f, 0.0f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(5.6f, 0.2f, 3.0f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+
+        //Drawing a cube back wall
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.7f, -0.7f, 0.0f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(5.6f, 2.1f, 0.2f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.82f, 0.75f);
+
+        //Drawing a cube left wall
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.7f, -0.7f, 0.0f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.2f, 2.1f, 3.0f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.82f, 0.75f);
+
+
+        //Drawing a cube right wall
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.7f, -0.7f, 0.0f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.2f, 2.1f, 3.0f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.82f, 0.75f);
+
+        //Drawing a cube middle wall 1
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.1f, -0.7f, 0.0f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.05f, 1.5f, 1.2f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.91f, 0.75f, 0.50f);
+
+        //Drawing a cube middle wall 2
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-1.65f, -0.7f, 0.0f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.05f, 1.5f, 1.2f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.91f, 0.75f, 0.50f);
+
+        //Drawing a cube left side wall 
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.7f, -0.7f, 1.5f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(1.2f, 1.5f, 0.05f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.91f, 0.75f, 0.50f);
+
+        //Drawing a cube right side wall 
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.7f, -0.7f, 1.5f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(1.2f, 1.5f, 0.05f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.91f, 0.75f, 0.50f);
+
+
+        //Drawing a cube middle table
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.7f, 0.0f, 0.0f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(5.6f, 0.05f, 0.8f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.87f, 0.68f, 0.45f);
+
+
+        //Drawing a cube left table
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.7f, 0.0f, 1.5f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.8f, 0.05f,1.5f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.87f, 0.68f, 0.45f);
+
+        //Drawing a cube right table
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.1, 0.0f, 1.5f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.8f, 0.05f, 1.5f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.87f, 0.68f, 0.45f);
+
+
+        //Drawing a cube right chair
+        //Drawing a cube right chair seat
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.8, -0.2f, 2.2f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.26f, 0.02f, 0.3f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.65f, 0.20f);
+        //Drawing a cube right chair back rest
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.8, -0.2f, 2.2f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.4f, 0.3f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.65f, 0.20f);
+        //Drawing a cube right chair four legs
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.8, -0.5f, 2.2f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.5f, 0.5f, 0.5f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.8, -0.5f, 2.48f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.5f, 0.5f, 0.5f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.04, -0.5f, 2.48f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.5f, 0.5f, 0.5f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.04, -0.5f, 2.2f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.5f, 0.5f, 0.5f);
+
+
+        //Drawing a cube left chair
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.8, -0.2f, 2.2f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.26f, 0.02f, 0.3f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.65f, 0.20f);
+        //Drawing a cube left chair back rest
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.56, -0.2f, 2.2f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.4f, 0.3f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.65f, 0.20f);
+        //Drawing a cube left chair four legs
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.8, -0.5f, 2.2f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.5f, 0.5f, 0.5f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.8, -0.5f, 2.48f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.5f, 0.5f, 0.5f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.56, -0.5f, 2.48f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.5f, 0.5f, 0.5f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.56, -0.5f, 2.2f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.5f, 0.5f, 0.5f);
+
+
+        //Drawing a cube middle chair
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-0.9, -0.2f, 0.9f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.02f, 0.26f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.65f, 0.20f);
+        //Drawing a cube middle chair back rest
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-0.9, -0.2f, 1.16f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.4f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.65f, 0.20f);
+        //Drawing a cube middle chair four legs
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-0.9, -0.5f, 1.16f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-0.62, -0.5f, 1.16f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-0.62, -0.5f, 0.9f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-0.9, -0.5f, 0.9f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+
+
+
+        //Drawing a cube middle right chair
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.8, -0.2f, 0.9f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.02f, 0.26f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.65f, 0.20f);
+        //Drawing a cube middle right chair back rest
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.8, -0.2f, 1.16f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.4f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.65f, 0.20f);
+        //Drawing a cube middle right chair four legs
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.8, -0.5f, 1.16f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.08, -0.5f, 1.16f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.08, -0.5f, 0.9f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.8, -0.5f, 0.9f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+
+
+        //Drawing a cube middle left chair
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.8, -0.2f, 0.9f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.02f, 0.26f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.65f, 0.20f);
+        //Drawing a cube middle left chair back rest
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.8, -0.2f, 1.16f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.4f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.85f, 0.65f, 0.20f);
+        //Drawing a cube middle left chair four legs
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.8, -0.5f, 1.16f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.52, -0.5f, 1.16f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.52, -0.5f, 0.9f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.8, -0.5f, 0.9f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.3f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 1.0f, 1.0f, 1.0f);
+
+        //Drawing a cube right table monitor
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.6, 0.1f, 2.1f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.015f, 0.3f, 0.45f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.3f, 0.3f, 0.3f);
+        //Drawing a cube right table monitor stand
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.61, 0.0f, 2.31f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.01f, 0.25f, 0.05f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.0f, 0.0f, 0.0f);
+        //Drawing a right table mouse
+        Sphere sphere1 = Sphere();
+        //rgb
+        sphere1.setColor(0.1f, 0.1f, 0.1f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.3, 0.05f, 2.55f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.03f, 0.013f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        sphere1.drawSphere(lightingShader, model);
+        //Drawing a cube right table keyboard
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.25, 0.05f, 2.2f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.12f, 0.02f, 0.3f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+
+        //Drawing a cube right table CPU
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.25, 0.06f, 1.85f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.3f, 0.12f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+
+
+
+        //Drawing a cube left table monitor
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.4f, 0.1f, 2.1f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.015f, 0.3f, 0.45f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+        //Drawing a cube left table monitor stand
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.41, 0.0f, 2.31f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.01f, 0.25f, 0.05f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.0f, 0.0f, 0.0f);
+        //Drawing a left table mouse
+        Sphere sphere2 = Sphere();
+        //rgb
+        sphere1.setColor(0.1f, 0.1f, 0.1f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.1, 0.05f, 2.1f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.03f, 0.013f, 0.02f));
+        model = translateMatrix * scaleMatrix;
+        sphere1.drawSphere(lightingShader, model);
+        //Drawing a cube left table keyboard
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.15, 0.05f, 2.2f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.12f, 0.02f, 0.3f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+
+        //Drawing a cube right table CPU
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.35, 0.06f, 2.65f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.3f, 0.12f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+
+
+        //Drawing a cube middle table monitor
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-0.98, 0.1f, 0.3f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.45f, 0.3f, 0.015f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+        //Drawing a cube middle table monitor stand
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-0.78, 0.0f, 0.3f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.05f, 0.25f, 0.01f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.0f, 0.0f, 0.0f);
+        //Drawing a middle table mouse
+        Sphere sphere3 = Sphere();
+        //rgb
+        sphere1.setColor(0.1f, 0.1f, 0.1f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-0.54, 0.05f, 0.6f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.013f, 0.03f));
+        model = translateMatrix * scaleMatrix;
+        sphere1.drawSphere(lightingShader, model);
+        //Drawing a cube middile table keyboard
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-0.9, 0.05f, 0.55f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.02f, 0.12f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+
+        //Drawing a cube middile table CPU
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-1.26, 0.06f, 0.4f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.12f, 0.3f, 0.3f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+
+
+
+
+
+        //Drawing a cube middle right table monitor
+        translateMatrix = glm::translate(identityMatrix, glm::vec3( 0.73, 0.1f, 0.3f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.45f, 0.3f, 0.015f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+        //Drawing a cube middle right table monitor stand
+        translateMatrix = glm::translate(identityMatrix, glm::vec3( 0.93, 0.0f, 0.3f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.05f, 0.25f, 0.01f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.0f, 0.0f, 0.0f);
+        //Drawing a middle right table mouse
+        Sphere sphere4 = Sphere();
+        //rgb
+        sphere1.setColor(0.1f, 0.1f, 0.1f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(1.18, 0.05f, 0.6f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.013f, 0.03f));
+        model = translateMatrix * scaleMatrix;
+        sphere1.drawSphere(lightingShader, model);
+        //Drawing a cube middile right table keyboard
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.80, 0.05f, 0.55f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.02f, 0.12f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+
+        //Drawing a cube middile table CPU
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(0.4, 0.06f, 0.4f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.12f, 0.3f, 0.3f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+
+
+
+
+
+        //Drawing a cube middle left table monitor
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.90, 0.1f, 0.3f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.45f, 0.3f, 0.015f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+        //Drawing a cube middle left table monitor stand
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.7, 0.0f, 0.3f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.05f, 0.25f, 0.01f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.0f, 0.0f, 0.0f);
+        //Drawing a middle left table mouse
+        Sphere sphere5 = Sphere();
+        //rgb
+        sphere1.setColor(0.1f, 0.1f, 0.1f);
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.45, 0.05f, 0.6f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.02f, 0.013f, 0.03f));
+        model = translateMatrix * scaleMatrix;
+        sphere1.drawSphere(lightingShader, model);
+        //Drawing a cube middile left table keyboard
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-2.83, 0.05f, 0.55f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.3f, 0.02f, 0.12f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+
+        //Drawing a cube middile table CPU
+        translateMatrix = glm::translate(identityMatrix, glm::vec3(-3.18, 0.06f, 0.4f));
+        scaleMatrix = glm::scale(identityMatrix, glm::vec3(0.12f, 0.3f, 0.3f));
+        model = translateMatrix * scaleMatrix;
+        drawCube(cubeVAO, lightingShader, model, 0.2f, 0.2f, 0.2f);
+
+
         ourShader.use();
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
@@ -429,7 +810,7 @@ int main()
             model = glm::translate(model, pointLightPositions[i]);
             model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
             ourShader.setMat4("model", model);
-            if(pointLightOn)
+            if (pointLightOn)
                 ourShader.setVec3("color", glm::vec3(0.8f, 0.8f, 0.8f));
             else
                 ourShader.setVec3("color", glm::vec3(0.25f, 0.25f, 0.25f));
